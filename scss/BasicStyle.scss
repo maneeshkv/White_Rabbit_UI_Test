@@ -1,0 +1,293 @@
+@import 'variables';
+
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('../fonts/HKGrotesk-Black.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('../fonts/HKGrotesk-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('../fonts/HKGrotesk-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('../fonts/HKGrotesk-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('../fonts/HKGrotesk-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'HK Grotesk';
+  src: url('../fonts/HKGrotesk-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root{
+  @include scrollbar-style;
+}
+
+* {margin: 0px; padding: 0px; border: medium none; outline: medium none !important; list-style: outside none none; font-size: 100%; box-sizing: border-box; }
+*, *:before, *:after { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; outline: none!important; }
+html, body { height: 100%; font-family:$font-primary;color:$bodyClr;font-weight: 400; margin: 0; padding: 0;}
+a{text-decoration: none; outline: none!important; }
+a img { border: none; }
+a, a:hover, a:active, a:focus,button,.btn, .close {transition: $transition-style;outline: none!important;}
+dl, ol, ul{margin: 0;padding: 0;}
+li {list-style: none; }
+img{max-width:100%;}
+::selection {background-color: $primary; color: $white; }
+.btn{
+  &:focus,&:active,&.active{box-shadow:none!important;}
+}
+.button{position:relative;display:inline-block;cursor:pointer;}
+span{position: relative;}
+
+p{margin: 0;color:$bodyClr;font-size:0.938rem;
+  + p{margin-top: 1.125rem;}
+}
+
+@media (min-width: 1260px){.container{max-width: 1200px;}}
+@media (min-width: 1200px){.header .container{max-width: 1060px;}}
+
+
+h1{font-size: 1.875rem;
+  @media(max-width:767px){font-size: 1.563rem;}
+}
+h2{font-size: 1.563rem;
+  @media(max-width:767px){font-size: 1.25rem;}
+}
+
+
+.shine{position: relative;display: inline-flex;overflow:hidden;
+  &:before{
+    position: absolute;
+    top: 0;
+    left: -75%;
+    z-index: 2;
+    display: block;
+    content: '';
+    width: 50%;
+    height: 100%;
+    background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+    -webkit-transform: skewX(-25deg);
+    transform: skewX(-25deg);
+  }
+  &:hover:before{-webkit-animation: shine .75s;animation: shine .75s;}
+}
+@-webkit-keyframes shine {
+	100% {
+		left: 125%;
+	}
+}
+@keyframes shine {
+	100% {
+		left: 125%;
+	}
+}
+
+// hamburger
+.hamburger{display: none;
+  .line{width: 3.125rem;height: 0.313rem;background-color: $secondary;
+    display: block;margin: .5rem auto;transition: $transition-style;
+  }
+  &:hover{cursor: pointer;}
+  &.is-active{
+    .line:nth-child(2){opacity: 0;}
+    .line:nth-child(1){@include TransformNth1;}
+    .line:nth-child(3){@include TransformNth3;}
+  }
+  @media(max-width:991px){display: inline-block;}
+}
+// hamburger
+
+
+
+.common-btn{background: $buttonClr;border-radius:0.125rem;color: $white;font-size: 0.938rem;padding: 0.375rem 1.25rem;height: 3rem;
+  border: none;position: relative;white-space:nowrap;@include flexprop(inline-flex);font-weight:700;
+  &:hover{color: $white;box-shadow:0 10px 6px rgba(0,0,0,.2);}
+  // &:active {
+  //   background-color: rgba($primary,.8);
+  // }
+}
+.starRating{display: flex;
+  img{margin-right: 0.375rem;}
+}
+
+.slick-arrow{width: 3rem;height: 3rem;border-radius: 50%;@include flexprop(inline-flex);background: #F4F6F6;transition:$transition-style;z-index: 1;
+  &:hover,&:focus{background: $secondary;}
+  &:before{display: none;}
+  @media(max-width:576px){
+    &.slick-next{right: 0;}
+    &.slick-prev{left: 0;}
+  }
+}
+
+// radios
+$checkbox-size: 1rem;
+$checkText: #202324;
+$brand: $secondary;
+@mixin checkBg{margin-bottom: 1.25rem;
+  &:last-child{margin-bottom: 0;}
+  label{@include flexprop(flex,flex-start,flex-start);cursor: pointer;}
+  input {
+    min-width: 1rem;
+    position: relative !important;
+    top: 0.125rem;
+    appearance: none;
+    box-sizing: content-box;
+    overflow: hidden;
+    margin-right: $checkbox-size / 2;
+    cursor: pointer;
+    // circle
+    &:before {
+      content: '';
+      display: block;
+      box-sizing: content-box;
+      width: $checkbox-size;
+      height: $checkbox-size;
+      border: 0.125rem solid $checkText;
+      transition: 0.2s border-color ease;
+    }
+    &:checked:before {
+      border-color: $secondary;
+      background: $white;
+      transition: 0.5s border-color ease;
+    }
+    &:disabled:before {
+      border-color: $checkText;
+      background-color: $checkText;
+    }
+  
+    // dot
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      box-sizing: content-box;
+      top: 50%;
+      left: 50%;
+      transform-origin: 50% 50%;
+      background-color: $secondary;
+      width: $checkbox-size;
+      height:$checkbox-size;
+      border-radius: 100vh;
+      transform: translate(-50%, -50%) scale(0);
+    }
+  
+    &[type="radio"] {
+      &:before {
+        border-radius: 100vh;
+      }
+  
+      &:after {
+        width: $checkbox-size - 0.25;
+        height: $checkbox-size - 0.25;
+        border-radius: 100vh;
+        transform: translate(-50%, -50%) scale(0);
+      }
+        &:checked:after {
+        animation: toggleOnRadio 0.2s ease forwards;
+      }
+    }
+  
+    &[type="checkbox"] {
+      &:before {
+        border-radius: $checkbox-size / 4;
+      }
+      &:after {
+        width: $checkbox-size * 0.6;
+        height: $checkbox-size;
+        border-radius: 0;
+        transform: translate(-50%, -85%) scale(0) rotate(45deg);
+        background-color: transparent;
+        box-shadow: 3px 3px 0px 0px $brand;
+      }
+      &:checked:after {
+        animation: toggleOnCheckbox 0.2s ease forwards;
+      }
+    }
+    
+    &[type="checkbox"].filled  {
+      &:before {
+        border-radius: $checkbox-size / 4;
+        transition: 0.2s border-color ease, 0.2s background-color ease;
+      }
+      &:checked:not(:disabled):before {
+        background-color: $brand;
+      }
+      &:not(:disabled):after {
+        box-shadow: 3px 3px 0px 0px white;
+      }
+    }
+  }
+  .label-text{color:$checkText;
+    b{font-weight: 600;font-size: 1rem;margin-bottom:.5rem;
+      span{color: $secondary;}
+    }
+    p{font-weight: normal;font-size: 0.813rem;
+      b{font-weight: 600;font-size: 0.813rem;}
+      img + img{margin-left: 0.125rem;}
+      &.grey{color: #545C5F;}
+    }
+  }
+}
+
+@keyframes toggleOnCheckbox {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -85%) scale(0) rotate(45deg);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translate(-50%, -85%) scale(0.9) rotate(45deg);
+  }
+  
+  100% {
+    transform: translate(-50%, -85%) scale(0.8) rotate(45deg);
+  }
+}
+
+@keyframes toggleOnRadio {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+  
+  100% {
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+}
+.checkBg{@include checkBg;}

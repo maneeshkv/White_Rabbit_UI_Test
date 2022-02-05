@@ -1,0 +1,45 @@
+// Fonts
+$font-primary: 'HK Grotesk';
+
+
+// General Colors
+$primary:#03062F;
+$secondary:#00BA74;
+$buttonClr:#2783F3;
+$bodyClr:#222323;
+
+$white:#fff;
+$black:#000;
+$Bg-ash:#EDF1F2;
+
+$transition-style: all 0.3s ease-in-out;
+$Border:0.063rem solid #ddd;
+
+
+// mixins --------------
+@mixin scrollbar-style( $scrollTrackbg:$Bg-ash,$scrollThumbBg:$primary) {
+  * {scrollbar-width: thin;}
+  *::-webkit-scrollbar {width: 0.375rem;height: 0.625rem;}
+  *::-webkit-scrollbar-track {background: $scrollTrackbg;}
+  *::-webkit-scrollbar-thumb {background-color: $scrollThumbBg;border-radius: 2rem;}
+}
+
+@mixin flexprop($display:flex,$alignItems:center,$justifyContet:center){
+    display:$display;align-items: $alignItems;justify-content: $justifyContet;
+}
+
+@for $i from 1 through 6{
+    h#{$i}{font-weight: normal;margin: 0;font-weight:800;line-height: normal;}
+}
+
+$prefix-list: '-webkit-transform', '-ms-transform', '-o-transform', 'transform';
+@mixin TransformNth1{
+    @each $prefix in $prefix-list {
+        #{$prefix}: translateY(13px) rotate(45deg);
+    }
+}
+@mixin TransformNth3{
+    @each $prefix in $prefix-list {
+        #{$prefix}: translateY(-13px) rotate(-45deg);
+    }
+}
